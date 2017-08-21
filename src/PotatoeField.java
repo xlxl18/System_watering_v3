@@ -4,7 +4,7 @@ public class PotatoeField  extends Field implements Sensor {
     public void getLevel(int level) {
         if (this.humidityLevel < level) {
             Main main = new Main();
-            main.irrigation();
+            main.potatoeIrrigation();
         }
     }
     public void startIrrigation() {
