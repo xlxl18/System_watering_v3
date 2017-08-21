@@ -1,7 +1,7 @@
 import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
-public class main  {
+import java.util.concurrent.*;
+
+public class Main  {
     private static PotatoeField potatoeField = new PotatoeField();
     private static WheatField wheatField = new WheatField();
     private static RiceField riceField = new RiceField();
@@ -56,7 +56,16 @@ public class main  {
 
     }
     public static void main(String[] args) {
-        irrigation();
+        ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
+        service.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                irrigation();
+                potatoeField.getLevel(300);
+                wheatField.getLevel(300);
+                riceField.getLevel(300);
 
+            }
+        },0, 7200, TimeUnit.SECONDS);
     }
 }
